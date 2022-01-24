@@ -46,6 +46,8 @@ func removeDuplicates2(nums []int) int {
 
 // 解法三：双指针解法
 func removeDuplicates3(nums []int) int {
-
+	if len(nums) <= 1 {
+		return len(nums)
+	}
 	return 0
 }
