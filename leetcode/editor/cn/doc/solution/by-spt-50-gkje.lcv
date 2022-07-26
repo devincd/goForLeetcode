@@ -1,0 +1,51 @@
+正好利用10进制加法规则即可
+从个位起正好对应 位正好对应链表的第几个节点
+从两链表里的对应节点相加 取个位结果生成结果节点即可
+和大于9 则进一参与下一个位（即下一个节点值）的计算
+原计算：
+
+![\[QM6{)HR0`0_YT9%18)F365.png](https://pic.leetcode-cn.com/1658592352-qClxgB-%5BQM6%7B)HR0%600_YT9_18)F365.png)
+
+对称变化后：
+
+![IMG_20220724_000424.png](https://pic.leetcode-cn.com/1658592380-cnBqCT-IMG_20220724_000424.png)
+
+通过上面加法示意图看到  做对称后 跟题目要求流程正好一致
+
+* 
+
+```
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
+    int sum = 0;  // 当前节点值和
+    struct ListNode * header = NULL;
+    struct ListNode * tmpNode = NULL;
+    while(l1 != NULL || l2 != NULL || sum){ // 判断当前是否还有节点或进一位需要计算
+        if(l1){
+            sum += l1->val; 
+            l1 = l1->next;
+        }
+        if(l2){
+            sum += l2->val;
+            l2 = l2->next;
+        }
+        
+        // 创建结果节点
+        struct ListNode* node = (struct ListNode*)malloc(sizeof(struct ListNode));
+        if(!node){
+            break;
+        }
+        node->next = NULL;
+        node->val = sum % 10; //当前节点值的个位
+        sum = sum / 10;       //如果大于9 则记录进1的值 参与下一个节点位的计算
+        if(!header){
+            header = node;   
+        }
+        if(tmpNode){
+            tmpNode->next = node;
+        }   
+        tmpNode = node;
+    }
+    return header;
+}
+```
+
