@@ -45,11 +45,17 @@
 
 package main
 
+import "fmt"
+
 func main() {
+	nums := []int{2, 7, 11, 15}
+	target := 9
+	fmt.Println(twoSumTwo(nums, target))
 }
 
 //leetcode submit region begin(Prohibit modification and deletion)
 func twoSum(nums []int, target int) []int {
+	// 时间复杂度O(n)
 	hashmap := make(map[int]int)
 	for index, val := range nums {
 		if key, ok := hashmap[target-val]; ok {
@@ -61,3 +67,15 @@ func twoSum(nums []int, target int) []int {
 }
 
 //leetcode submit region end(Prohibit modification and deletion)
+
+func twoSumTwo(nums []int, target int) []int {
+	// 时间复杂度O(n²)
+	for i := 0; i < len(nums); i++ {
+		for j := i + 1; j < len(nums); j++ {
+			if nums[i]+nums[j] == target {
+				return []int{i, j}
+			}
+		}
+	}
+	return nil
+}
