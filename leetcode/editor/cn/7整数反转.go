@@ -54,11 +54,14 @@ func main() {
 func reverse(x int) int {
 	var cur int
 	for x != 0 {
+		// 1.取数字的最后一位
 		tail := x % 10
+		// 2.拼接反转后的数字
 		cur = cur*10 + tail
+		// 3.去掉数字的最后一位
 		x = x / 10
 	}
-	// 判断是否超标
+	// 判断是否越界
 	if cur > math.MaxInt32 || cur < math.MinInt32 {
 		return 0
 	}
