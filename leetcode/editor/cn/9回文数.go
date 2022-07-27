@@ -46,10 +46,15 @@
 // Related Topics 数学 👍 2114 👎 0
 package main
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 func main() {
-
+	fmt.Println("121 -> ", Reverse(121))
+	fmt.Println("12456 -> ", Reverse(12456))
+	fmt.Println("-321 -> ", Reverse(-321))
 }
 
 //leetcode submit region begin(Prohibit modification and deletion)
@@ -66,7 +71,16 @@ func isPalindrome(x int) bool {
 
 //leetcode submit region end(Prohibit modification and deletion)
 
-// 数字反转
-func Reverse(number int) int {
-	return 0
+// Reverse 数字反转
+func Reverse(x int) int {
+	var cur int
+	for x != 0 {
+		// 1.取数字最后一位数
+		tail := x % 10
+		// 2.拼接反转后的新数
+		cur = cur*10 + tail
+		// 3.去掉最后一位数
+		x = x / 10
+	}
+	return cur
 }
